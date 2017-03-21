@@ -1,0 +1,161 @@
+<!-- Copyright (c) 2016, preview-code
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of preview-code nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>to-date-string-behavior tests</title>
+
+   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../to-date-string-behavior.html">
+
+</head>
+<body>
+  <script>
+  /*global ToDateStringBehavior*/
+    suite('<to-date-string-behavior>', function() {
+      var behavior;
+      // Deterministic point in time
+      // To prevent tests from failing due to timing differences
+      //  when using Date().getTime();
+      var now = 1464342890215;
+
+      function ISOtimeAgo(hours) {
+        return new Date(now - hours * 60 * 60 * 1000).toISOString();
+      }
+
+      function assertText(hours, expected) {
+        var output = behavior.toDateString(ISOtimeAgo(hours));
+        assert.equal(output, expected);
+      }
+
+      function assertTextLength(hours, expected, length) {
+        var output = behavior.toDateStringLength(ISOtimeAgo(hours), length)
+        assert.equal(output, expected);
+      }
+
+      setup(function() {
+        behavior = ToDateStringBehavior;
+        behavior._getCurrentTime = function() {
+          return now;
+        }
+      });
+
+      test('shows less than 1 minute when less than 45 seconds ago in normal mode', function() {
+        assertText(42 / (60 * 60), '<1mi ago');
+      });
+
+      test('shows 1 minute when less than 90 seconds ago in normal mode', function() {
+        assertText(85 / (60 * 60), '1mi ago');
+      });
+
+      test('shows minutes when less than 45 minutes ago in normal mode', function() {
+        assertText(40 / 60, '40mi ago');
+      });
+
+      test('shows 1 hour when less than 90 minutes ago in normal mode', function() {
+        assertText(85 / 60, '1h ago');
+      });
+
+      test('shows hours when less than 22 hours ago in normal mode', function() {
+        assertText(3.5, '4h ago');
+      });
+
+      test('shows 1 day when less than 36 hours ago in normal mode', function() {
+        assertText(30, '1d ago');
+      });
+
+      test('shows days when less than 25 days ago in normal mode', function() {
+        assertText(20 * 24, '20d ago');
+      });
+
+      test('shows 1 month when less than 45 days ago in normal mode', function() {
+        assertText(40 * 24, '1mo ago');
+      });
+
+      test('shows months when less than 345 days ago in normal mode', function() {
+        assertText(8.5 * 31 * 24, '9mo ago');
+      });
+
+      test('shows 1 year when less than 545 days ago in normal mode', function() {
+        assertText(13 * 31 * 24, '1y ago');
+      });
+
+      test('shows year when more than 545 days ago in normal mode', function() {
+        assertText(15.5 * 12 * 31 * 24, '16y ago');
+      });
+
+      test('shows less than 1 minute when less than 45 seconds ago in normal mode', function() {
+        assertText(42 / (60 * 60), '<1mi ago');
+      });
+
+      test('shows 1 minute when less than 90 seconds ago in short mode', function() {
+        assertTextLength(85 / (60 * 60), '1mi', 'short');
+      });
+
+      test('shows minutes when less than 45 minutes ago in short mode', function() {
+        assertTextLength(40 / 60, '40mi', 'short');
+      });
+
+      test('shows 1 hour when less than 90 minutes ago in short mode', function() {
+        assertTextLength(85 / 60, '1h', 'short');
+      });
+
+      test('shows hours when less than 22 hours ago in medium mode', function() {
+        assertTextLength(3.5, '4h ago', 'medium');
+      });
+
+      test('shows 1 day when less than 36 hours ago in medium mode', function() {
+        assertTextLength(30, '1d ago', 'medium');
+      });
+
+      test('shows days when less than 25 days ago in medium mode', function() {
+        assertTextLength(20 * 24, '20d ago', 'medium');
+      });
+
+      test('shows months when less than 345 days ago in long mode', function() {
+        assertTextLength(8.5 * 31 * 24, '9 months ago', 'long');
+      });
+
+      test('shows 1 year when less than 545 days ago in long mode', function() {
+        assertTextLength(13 * 31 * 24, '1 year ago', 'long');
+      });
+
+      test('shows year when more than 545 days ago in long mode', function() {
+        assertTextLength(15.5 * 12 * 31 * 24, '16 years ago', 'long');
+      });
+
+    });
+  </script>
+
+</body>
+</html>

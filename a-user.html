@@ -1,0 +1,36 @@
+<!--
+@license
+Copyright (c) 2017 Preview-Code. All rights reserved.
+This code may only be used under the BSD style license found in LICENSE.txt
+-->
+ <link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="a-user">
+  <template>
+    <style>
+      a.user {
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--primary-text-color);
+      }
+      a.user:hover {
+        text-decoration: underline;
+      }
+    </style>
+
+    <a class="user" href$=[[user.html_url]] target="_blank">[[user.login]]</a>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'a-user',
+      properties: {
+        /**
+         * The corresponding user.
+         * @type {Object}
+         */
+        user: Object
+      }
+    });
+  </script>
+</dom-module>

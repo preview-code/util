@@ -1,0 +1,34 @@
+<!--
+@license
+Copyright (c) 2017 Preview-Code. All rights reserved.
+This code may only be used under the BSD style license found in LICENSE.txt
+-->
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../markdown-input.html">
+<dom-module id="basic-demo">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <markdown-input project="[[project]]"></markdown-input>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'basic-demo',
+
+      properties: {
+        project: {
+          type: Object,
+          value: {
+            name: 'name',
+            owner: 'owner'
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>

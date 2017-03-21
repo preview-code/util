@@ -1,0 +1,71 @@
+<!--
+@license
+Copyright (c) 2017 Preview-Code. All rights reserved.
+This code may only be used under the BSD style license found in LICENSE.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<dom-module id="list-item-label">
+  <template>
+    <style>
+      :host {
+        margin-bottom: 4px;
+        width: 100%;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+      div {
+        display:inline-block;
+        height: 24px;
+      }
+      :host:last-child {
+        margin-bottom: 0px;
+      }
+      :host([type="title"]) {
+        font-weight: 800;
+        font-size: 1em;
+      }
+      :host([type=subtitle]) {
+        font-weight: 400;
+        color: var(--secondary-text-color);
+      }
+      :host([type=info]) {
+        color: var(--secondary-text-color);
+        text-align: right;
+        font-size: 0.9em;
+      }
+      :host([type=box]) div {
+        display: inline;
+        padding: 3px 6px;
+        border-radius: 6px;
+        color: var(--tag-text-color, --primary-background-color);
+        background-color: var(--tag-color, --pr-status-color);
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+      iron-icon {
+        vertical-align: text-bottom;
+      }
+    </style>
+
+    <template is="dom-if" if="[[icon]]">
+      <iron-icon icon="[[icon]]"></iron-icon>
+    </template>
+    <div><content></content></div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'list-item-label',
+      properties: {
+        type: {
+          type: String,
+          reflectToAttribute: true
+        },
+        icon: String
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,50 @@
+{
+  "name": "markdown-input",
+  "version": "0.0.1",
+  "description": "An input element with markdown support",
+  "authors": [
+    "Preview-Code team"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/preview-code/markdown-input.git"
+  },
+  "homepage": "https://github.com/preview-code/markdown-input",
+  "main": "markdown-input.html",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.8.0",
+    "iron-test-helpers": "txsmith/iron-test-helpers#master",
+    "iron-icons": "PolymerElements/iron-icons#^1.2.0",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.12"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^5.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24",
+    "paper-material": "^1.0.6",
+    "test-fixture": "^1.0.0",
+    "iron-test-helpers": "txsmith/iron-test-helpers#master"
+  },
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "comment",
+    "review",
+    "code"
+  ],
+  "resolutions": {
+    "iron-test-helpers": "^1.0.0",
+    "marked-element": "expose-callback"
+  }
+}
