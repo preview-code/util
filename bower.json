@@ -1,16 +1,15 @@
 {
-  "name": "markdown-input",
+  "name": "util",
   "version": "0.0.1",
-  "description": "An input element with markdown support",
+  "description": "Preview-Code utility elements and behaviors",
   "authors": [
     "Preview-Code team"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/preview-code/markdown-input.git"
+    "url": "git://github.com/preview-code/util.git"
   },
-  "homepage": "https://github.com/preview-code/markdown-input",
-  "main": "markdown-input.html",
+  "homepage": "https://github.com/preview-code/util",
   "license": "BSD-3-Clause",
   "private": true,
   "ignore": [
@@ -39,12 +38,7 @@
     "web-components",
     "web-component",
     "polymer",
-    "comment",
-    "review",
-    "code"
-  ],
-  "resolutions": {
-    "iron-test-helpers": "^1.0.0",
-    "marked-element": "expose-callback"
-  }
+    "preview-code",
+    "utilities"
+  ]
 }
