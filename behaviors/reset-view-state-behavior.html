@@ -19,19 +19,30 @@ var ResetViewStateBehavior = (function() {
   return {
     properties: { },
 
+    /**
+     * An element using this behavior can call this function to notify all children to perform a reset.
+     */
     performReset: function () {
+
+      // Function to call when an element wants to reset it's children.
       var resetChildren = function() {
         Polymer.dom(this.root).querySelectorAll('*')
         .forEach(function (child) {
           if (child.performReset) child.performReset();
         });
       }.bind(this);
+      
+      this.resetViewState(resetChildren);
+    },
 
-      if (this.resetViewState) {
-        this.resetViewState(resetChildren);
-      } else {
-        resetChildren();
-      }
+    /**
+     * Default reset behavior is to visit all chindren and notify them to reset.
+     * Elements have to override this function if they need to do some work to reset state.
+     * 
+     * Call resetChildren to notify all child elements to reset.
+     */
+    resetViewState: function (resetChildren) {
+      resetChildren();
     }
   };
 })();
